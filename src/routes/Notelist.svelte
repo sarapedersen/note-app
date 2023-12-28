@@ -1,8 +1,8 @@
-<script>
-	export let notes;
+<script lang="ts">
+	export let notes: string[];
 </script>
 
-<section class="notes">
+<section class="list">
 	<h1>Notes</h1>
 	<ul>
 		{#each notes as note}
@@ -11,7 +11,19 @@
 	</ul>
 </section>
 
-<style>
-	.notes {
+<style lang="scss">
+	.list {
+		height: 100vh;
+		background-color: aliceblue;
+		padding: 1rem;
+
+		ul {
+			list-style: none;
+
+			li {
+				padding: 0.5rem;
+				border-bottom: 1px solid #ccc;
+			}
+		}
 	}
 </style>

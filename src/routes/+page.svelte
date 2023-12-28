@@ -11,21 +11,20 @@
 
 <svelte:head>
 	<title>Notes</title>
-	<meta name="description" content="Svelte demo app" />
 </svelte:head>
 
 <main class="notes">
 	<NoteList {notes} />
 
-	<div>
-		<!-- <input bind:value={newNote} type="text" placeholder="New note">
-        <button on:click={addNote}>Add</button> -->
+	<div class="note">
+		<textarea bind:value={newNote} placeholder="New note"></textarea>
+		<button on:click={addNote}>Save</button>
 	</div>
 </main>
 
 <style lang="scss">
 	.notes {
 		display: grid;
-		grid-template-columns: 1fr 5fr;
+		grid-template-columns: 2fr 5fr;
 	}
 </style>
