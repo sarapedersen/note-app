@@ -1,25 +1,29 @@
 <script lang="ts">
 	import NoteList from './Notelist.svelte';
+	import Note from './Note.svelte';
+	import { currentNote } from '$lib/store';
+	import type { NoteType } from '../types';
+	import { v4 as uuidv4 } from 'uuid';
 
-	let newNote = '';
-	let notes = ['My first note', 'My second note'];
+	let activeNote = false;
 
-	function addNote() {
-		notes = [...notes, newNote];
+	function handleNewNote() {
+		let blankNote: NoteType = {
+			id: uuidv4(),
+			title: '',
+			body: ''
+		};
+
+		currentNote.set(blankNote);
+		activeNote = true;
 	}
 </script>
 
-<svelte:head>
-	<title>Notes</title>
-</svelte:head>
-
 <main class="notes">
-	<NoteList {notes} />
-
-	<div class="note">
-		<textarea bind:value={newNote} placeholder="New note"></textarea>
-		<button on:click={addNote}>Save</button>
-	</div>
+	<NoteList addNewNote={handleNewNote} />
+	{#if $currentNote || activeNote}
+		<Note />
+	{/if}
 </main>
 
 <style lang="scss">
