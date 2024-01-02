@@ -2,6 +2,9 @@
 	import { notes, currentNote } from '$lib/store';
 
 	function save() {
+		if ($currentNote.title.length < 1) {
+			$currentNote.title = 'Untitled';
+		}
 		const existingNote = $notes.find((note) => note.id === $currentNote.id);
 		if (existingNote) {
 			$notes = $notes.map((note) => (note.id === $currentNote.id ? $currentNote : note));
@@ -21,31 +24,37 @@
 	.note {
 		display: flex;
 		flex-direction: column;
-		padding: 1rem;
+		padding: 2rem;
+		width: 100%;
+		background-color: $gray-2;
 
+		&__title,
+		&__textarea {
+			padding: 1rem;
+			border: 1px solid #ccc;
+			border-radius: 0.5rem;
+			border: 1px solid $gray-1;
+			background-color: $gray-1;
+			color: $white;
+		}
 		&__title {
 			font-size: 1.2rem;
 			font-weight: bold;
 			margin-bottom: 1rem;
-			padding: 1rem;
-			border: 1px solid #ccc;
-			border-radius: 0.5rem;
 		}
 
 		&__textarea {
 			width: 100%;
 			height: 100%;
-			padding: 1rem;
-			border: 1px solid #ccc;
-			border-radius: 0.5rem;
 		}
 		&__save {
 			margin-top: 1rem;
-			padding: 1rem;
-			width: 10rem;
+			padding: 0.5rem;
+			width: 8rem;
 			align-self: flex-end;
-			border: 1px solid #ccc;
+			border: 1px solid $button-primary;
 			border-radius: 0.5rem;
+			background-color: $button-primary;
 		}
 	}
 </style>

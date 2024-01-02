@@ -1,2 +1,9 @@
-@import "$lib/styles/_colors.scss";
+// need extra linebreak here
+
+@import "$lib/styles/_variables.scss";
 @import "$lib/styles/_reset.scss";
+
+* {
+    font-family: 'Montserrat', sans-serif;
+    ;
+}

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { notes, currentNote } from '$lib/store';
 	import type { NoteType } from '../types';
+	import NoteIcon from '~icons/clarity/note-line';
 
 	export let addNewNote: () => void;
 
@@ -11,15 +12,19 @@
 
 <section class="list">
 	<h1>Notes</h1>
+	<button class="list__button" on:click={addNewNote}>
+		<NoteIcon font-size="25px" />
+	</button>
 	<ul>
 		{#each $notes as note}
-			<div class="list__row">
+			<button
+				on:click={() => editNote(note)}
+				class="list__row {note === $currentNote ? 'list__row--active' : ''}"
+			>
 				<li>{note.title}</li>
-				<button on:click={() => editNote(note)} class="row__button">edit</button>
-			</div>
+			</button>
 		{/each}
 	</ul>
-	<button on:click={addNewNote} class="list__button">Add new note</button>
 </section>
 
 <style lang="scss">
@@ -27,30 +32,50 @@
 		display: flex;
 		flex-direction: column;
 		height: 100vh;
-		background-color: rgb(224, 232, 234);
-		padding: 1rem;
+		background-color: $gray-3;
+		color: $white;
+		padding: 2rem 1.5rem;
+		width: 20rem;
+		min-width: 20rem;
+		position: relative;
+
+		h1 {
+			color: $orange-2;
+		}
 
 		&__row {
+			background-color: transparent;
 			list-style: none;
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
-			padding: 0.5rem;
-			border-bottom: 1px solid #ccc;
+			padding: 1rem 0.5rem;
+			border: none;
+			color: $white;
+			width: 100%;
+			cursor: pointer;
 
-			.row__button {
-				cursor: pointer;
-				padding: 0.2rem;
+			&--active {
+				background-color: $gray-2;
+				border-radius: 0.5rem;
 				border: none;
-				background-color: transparent;
+			}
+
+			&:first-child {
+				margin-top: 1rem;
 			}
 		}
 		&__button {
-			padding: 1rem;
-			border: 1px solid #ccc;
-			border-radius: 0.5rem;
-			position: fixed;
-			bottom: 1rem;
+			display: flex;
+			background-color: transparent;
+			color: $orange-2;
+			align-items: center;
+			gap: 0.5rem;
+			border: none;
+			outline: none;
+			position: absolute;
+			right: 1.5rem;
+			cursor: pointer;
 		}
 	}
 </style>

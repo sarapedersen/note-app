@@ -28,7 +28,7 @@
 
 <style lang="scss">
 	.notes {
-		display: grid;
-		grid-template-columns: 2fr 5fr;
+		display: flex;
+		background-color: $gray-2;
 	}
 </style>
