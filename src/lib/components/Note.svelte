@@ -58,7 +58,6 @@
 			.note__title {
 				font-size: 1.2rem;
 				font-weight: bold;
-
 				width: 100%;
 			}
 
