@@ -36,6 +36,7 @@
 			border: 1px solid $gray-1;
 			background-color: $gray-1;
 			color: $white;
+			font-size: 1.05rem;
 		}
 		&__title {
 			font-size: 1.2rem;

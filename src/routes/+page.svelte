@@ -1,9 +1,12 @@
 <script lang="ts">
 	import NoteList from './Notelist.svelte';
 	import Note from './Note.svelte';
-	import { currentNote } from '$lib/store';
+	import { currentNote, notes } from '$lib/store';
 	import type { NoteType } from '../types';
 	import { v4 as uuidv4 } from 'uuid';
+
+	export let data;
+	notes.set(data.notes);
 
 	let activeNote = false;
 
