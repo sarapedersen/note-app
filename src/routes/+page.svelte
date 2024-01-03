@@ -33,6 +33,6 @@
 <style lang="scss">
 	.notes {
 		display: flex;
-		background-color: $gray-2;
+		background-color: $gray-3;
 	}
 </style>

@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { notes, currentNote } from '$lib/store';
-	import type { NoteType } from '../../types';
 	import { client } from '../../client';
+	import DeleteIcon from '~icons/ic/twotone-delete';
 
-	function save() {
+	function saveNote() {
 		if ($currentNote.title.length < 1) {
 			$currentNote.title = 'Untitled';
 		}
@@ -20,12 +20,26 @@
 			client.create({ _type: 'note', title: $currentNote.title, body: $currentNote.body });
 		}
 	}
+
+	function deleteNote() {
+		$notes = $notes.filter((note) => note._id !== $currentNote._id);
+		client.delete($currentNote._id);
+		currentNote.set(null);
+	}
 </script>
 
 <section class="note">
-	<input class="note__title" placeholder="Title" bind:value={$currentNote.title} />
-	<textarea class="note__textarea" placeholder="New note" bind:value={$currentNote.body}></textarea>
-	<button class="note__save" on:click={save}>Save</button>
+	{#if $currentNote}
+		<div class="note__first-row">
+			<input class="note__title" placeholder="Title" bind:value={$currentNote.title} />
+			<button class="note__delete" on:click={deleteNote}>
+				<DeleteIcon class="delete__icon" font-size="35px" />
+			</button>
+		</div>
+		<textarea class="note__textarea" placeholder="New note" bind:value={$currentNote.body}
+		></textarea>
+		<button class="note__save" on:click={saveNote}>Save</button>
+	{/if}
 </section>
 
 <style lang="scss">
@@ -34,22 +48,39 @@
 		flex-direction: column;
 		padding: 2rem;
 		width: 100%;
-		background-color: $gray-2;
+		background-color: $gray-3;
+
+		&__first-row {
+			display: flex;
+			align-items: center;
+			margin-bottom: 1rem;
+
+			.note__title {
+				font-size: 1.2rem;
+				font-weight: bold;
+
+				width: 100%;
+			}
+
+			.note__delete {
+				cursor: pointer;
+				background-color: transparent;
+				border: none;
+				color: $button-secondary;
+				height: fit-content;
+				margin-left: 0.5rem;
+			}
+		}
 
 		&__title,
 		&__textarea {
 			padding: 1rem;
 			border: 1px solid #ccc;
 			border-radius: 0.5rem;
-			border: 1px solid $gray-1;
-			background-color: $gray-1;
+			border: 1px solid $gray-2;
+			background-color: $gray-2;
 			color: $white;
 			font-size: 1.05rem;
-		}
-		&__title {
-			font-size: 1.2rem;
-			font-weight: bold;
-			margin-bottom: 1rem;
 		}
 
 		&__textarea {

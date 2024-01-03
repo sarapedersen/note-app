@@ -32,7 +32,7 @@
 		display: flex;
 		flex-direction: column;
 		height: 100vh;
-		background-color: $gray-3;
+		background-color: $gray-4;
 		color: $white;
 		padding: 2rem 1.5rem;
 		width: 20rem;
@@ -56,7 +56,7 @@
 			cursor: pointer;
 
 			&--active {
-				background-color: $gray-2;
+				background-color: $gray-3;
 				border-radius: 0.5rem;
 				border: none;
 			}
@@ -76,6 +76,11 @@
 			position: absolute;
 			right: 1.5rem;
 			cursor: pointer;
+
+			&:focus,
+			&:hover {
+				color: $gray-1;
+			}
 		}
 	}
 </style>
