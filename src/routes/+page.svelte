@@ -1,18 +1,19 @@
 <script lang="ts">
-	import NoteList from './Notelist.svelte';
-	import Note from './Note.svelte';
+	import NoteList from '$lib/components/Notelist.svelte';
+	import Note from '$lib/components/Note.svelte';
 	import { currentNote, notes } from '$lib/store';
 	import type { NoteType } from '../types';
+	import type { PageData } from './$types';
 	import { v4 as uuidv4 } from 'uuid';
 
-	export let data;
+	export let data: PageData;
 	notes.set(data.notes);
 
 	let activeNote = false;
 
 	function handleNewNote() {
 		let blankNote: NoteType = {
-			id: uuidv4(),
+			_id: uuidv4(),
 			title: '',
 			body: ''
 		};

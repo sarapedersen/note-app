@@ -1,15 +1,23 @@
 <script lang="ts">
 	import { notes, currentNote } from '$lib/store';
+	import type { NoteType } from '../../types';
+	import { client } from '../../client';
 
 	function save() {
 		if ($currentNote.title.length < 1) {
 			$currentNote.title = 'Untitled';
 		}
-		const existingNote = $notes.find((note) => note.id === $currentNote.id);
+
+		const existingNote = $notes.find((note) => note._id === $currentNote._id);
 		if (existingNote) {
-			$notes = $notes.map((note) => (note.id === $currentNote.id ? $currentNote : note));
+			$notes = $notes.map((note) => (note._id === $currentNote._id ? $currentNote : note));
+			client
+				.patch($currentNote._id)
+				.set({ title: $currentNote.title, body: $currentNote.body })
+				.commit();
 		} else {
 			$notes = [...$notes, $currentNote];
+			client.create({ _type: 'note', title: $currentNote.title, body: $currentNote.body });
 		}
 	}
 </script>

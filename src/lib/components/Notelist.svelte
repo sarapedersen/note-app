@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { notes, currentNote } from '$lib/store';
-	import type { NoteType } from '../types';
+	import { currentNote, notes } from '$lib/store';
+	import type { NoteType } from '../../types';
 	import NoteIcon from '~icons/clarity/note-line';
 
 	export let addNewNote: () => void;
