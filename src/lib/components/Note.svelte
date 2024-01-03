@@ -38,7 +38,23 @@
 		</div>
 		<textarea class="note__textarea" placeholder="New note" bind:value={$currentNote.body}
 		></textarea>
-		<button class="note__save" on:click={saveNote}>Save</button>
+		<div class="note__bottom-row">
+			{#if $currentNote._updatedAt}
+				<div class="note__date">
+					Last updated: <time
+						>{new Date($currentNote._updatedAt).toLocaleString('en-US', {
+							day: 'numeric',
+							month: 'short',
+							year: 'numeric',
+							hour: 'numeric',
+							minute: 'numeric',
+							hour12: false
+						})}</time
+					>
+				</div>
+			{/if}
+			<button class="note__save" on:click={saveNote}>Save</button>
+		</div>
 	{/if}
 </section>
 
@@ -86,14 +102,28 @@
 			width: 100%;
 			height: 100%;
 		}
-		&__save {
+
+		&__bottom-row {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
 			margin-top: 1rem;
-			padding: 0.5rem;
-			width: 8rem;
-			align-self: flex-end;
-			border: 1px solid $button-primary;
-			border-radius: 0.5rem;
-			background-color: $button-primary;
+
+			.note__date {
+				color: $white;
+				display: flex;
+				flex-direction: column;
+				gap: 0.2rem;
+			}
+			.note__save {
+				margin-top: 1rem;
+				padding: 0.5rem;
+				width: 8rem;
+				align-self: flex-end;
+				border: 1px solid $button-primary;
+				border-radius: 0.5rem;
+				background-color: $button-primary;
+			}
 		}
 	}
 </style>

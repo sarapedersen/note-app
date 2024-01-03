@@ -3,6 +3,7 @@ import { z } from 'zod';
 
 const NoteSchema = z.object({
 	_id: z.string(),
+	_updatedAt: z.string(),
 	title: z.string(),
 	body: z.string()
 });
@@ -11,6 +12,7 @@ export async function load() {
 	const query = `
     *[_type == "note"] {
         _id,
+		_updatedAt,
         title,
         body,
       }`;
