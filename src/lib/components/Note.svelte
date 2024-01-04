@@ -116,6 +116,7 @@
 				gap: 0.2rem;
 			}
 			.note__save {
+				cursor: pointer;
 				margin-top: 1rem;
 				padding: 0.5rem;
 				width: 8rem;
